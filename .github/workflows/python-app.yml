@@ -26,7 +26,7 @@ jobs:
     - name: Install dependencies
       run: |
         python3 -m pip install --upgrade pip
-        pip install -r requirements.txt
+        pip install -r ./Docker/app/requirements.txt
     - name: Test with pytest
       run: |
         pytest

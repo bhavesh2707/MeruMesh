@@ -10,6 +10,7 @@ RUN yum install ffmpeg libsm6 libxext6 python3-pip git -y
 
 RUN pip3 install fastapi --target "${LAMBDA_TASK_ROOT}"
 RUN pip3 install mangum --target "${LAMBDA_TASK_ROOT}"
+RUN pip3
 
 COPY /app/main.py ${LAMBDA_TASK_ROOT}/lambda.py
 

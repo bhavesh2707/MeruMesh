@@ -4,6 +4,7 @@ variable "lambda_name" {
 variable "iam_role" {
   default = ""
 }
-# variable "image_uri" {
-#   default = "017022840072.dkr.ecr.us-east-2.amazonaws.com/merumesh:latest"
-# }
+variable "image_tag" {
+  default = "latest"
+  description = "Enter the image tag"
+}

@@ -1,6 +1,6 @@
 data "aws_ecr_image" "service_image" {
   repository_name = "merumesh"
-  image_tag       = "latest"
+  image_tag       = var.image_tag
 }
 
 resource "aws_lambda_function" "api_function" {

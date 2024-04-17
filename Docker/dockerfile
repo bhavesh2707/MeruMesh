@@ -1,19 +1,16 @@
-FROM python:3.10.14-alpine3.19
+FROM public.ecr.aws/lambda/python:3.10
 
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+WORKDIR /app
 
-# Update package index and install necessary system dependencies
-RUN apk update \
-    && apk add gcc musl-dev
+ARG DEBIAN_FRONTEND=noninteractive
 
-# Copy requirements.txt and install dependencies
-COPY ./app/requirements.txt .
-RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
+RUN yum update -y
+RUN yum update -y python3 curl libcom_err ncurses expat libblkid libuuid libmount
+RUN yum install ffmpeg libsm6 libxext6 python3-pip git -y
 
-# Copy the application code
-COPY ./app/main.py .
+RUN pip3 install fastapi --target "${LAMBDA_TASK_ROOT}"
+RUN pip3 install mangum --target "${LAMBDA_TASK_ROOT}"
 
-# Specify the command to run the application
-CMD ["uvicorn", "main:app","--host", "0.0.0.0","--port", "8000"]
+COPY /app/main.py ${LAMBDA_TASK_ROOT}/lambda.py
+
+CMD [ "lambda.handler" ]

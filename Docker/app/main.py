@@ -1,11 +1,10 @@
-from fastapi import FastAPI
 from mangum import Mangum
+from fastapi import FastAPI
 
 app = FastAPI()
 
+@app.get("/")
+def read_root():
+    return {"Welcome": "Welcome to the FastAPI on Lambda"}
+
 handler = Mangum(app)
-
-
-@app.get("/", tags=["root"])
-async def read_root() -> dict:
-    return {"message": "Welcome to your todo list."}

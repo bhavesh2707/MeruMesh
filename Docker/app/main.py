@@ -1,10 +1,14 @@
-from mangum import Mangum
 from fastapi import FastAPI
+import mangum
+import uvicorn
 
 app = FastAPI()
 
 @app.get("/")
 def read_root():
-    return {"Welcome": "Welcome to the FastAPI on Lambda"}
+    return {"Hello": "World"}
 
-handler = Mangum(app)
+handler = mangum.Mangum(app)
+
+if __name__ == "__main__":
+   uvicorn.run(app, host="0.0.0.0", port=8080)

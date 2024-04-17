@@ -8,3 +8,6 @@ variable "image_tag" {
   default = "latest"
   description = "Enter the image tag"
 }
+variable "source_arn" {
+  default = ""
+}

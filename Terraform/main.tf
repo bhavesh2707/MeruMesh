@@ -2,13 +2,14 @@
 module "aws_iam_role" {
   source = "./module/IAM"
 }
-module "aws_lambda_function" {
+module "lambda" {
   source = "./module/Lambda"
   lambda_name = var.lambda_name
   iam_role = module.aws_iam_role.invoke_arn_arn
   image_tag = var.image_tag
+  source_arn = "arn:aws:execute-api:${var.myregion}:${var.accountId}:${module.api.id}/*/${module.api.http_method}${module.api.path}"
 }
 module "api" {
     source = "./module/API"
-    uri = module.aws_lambda_function.invoke_arn
+    uri = module.lambda.invoke_arn
 }

@@ -14,10 +14,11 @@ resource "aws_lambda_function" "api_function" {
 resource "aws_lambda_permission" "allow_api" {
   statement_id  = "AllowAPIgatewayInvokation"
   action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.api_function.invoke_arn
+  function_name = aws_lambda_function.api_function.function_name
   principal     = "apigateway.amazonaws.com"
-}
 
+  source_arn = var.source_arn
+}
 output "invoke_arn" {
   value = aws_lambda_function.api_function.invoke_arn
 }

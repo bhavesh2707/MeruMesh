@@ -51,4 +51,4 @@ jobs:
 
     - name: Terraform Destory
       working-directory: ./Terraform
-      run: terraform destory -auto-approve
+      run: terraform destroy -auto-approve

@@ -48,3 +48,7 @@ jobs:
     - name: Terraform Apply
       working-directory: ./Terraform
       run: terraform apply -auto-approve tfplan
+
+    - name: Terraform Destory
+      working-directory: ./Terraform
+      run: terraform destory -auto-approve

@@ -54,8 +54,8 @@ jobs:
 
     - name: Terraform Plan
       working-directory: ./Terraform
-      run: terraform plan -out=tfplan
+      run: terraform plan -var image_tag=$GITHUB_RUN_ID -out=tfplan
     
     - name: Terraform Apply
       working-directory: ./Terraform
-      run: terraform apply -var image_tag=$GITHUB_RUN_ID -auto-approve tfplan
+      run: terraform apply -auto-approve tfplan

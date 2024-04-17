@@ -5,7 +5,7 @@ variable "iam_role" {
   default = ""
 }
 variable "image_tag" {
-  default = "latest"
+  default = ""
   description = "Enter the image tag"
 }
 variable "source_arn" {

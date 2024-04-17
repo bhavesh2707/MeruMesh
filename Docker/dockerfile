@@ -1,12 +1,12 @@
-FROM 3.10-alpine3.18
+FROM python:3.10.14-alpine3.19
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 # Update package index and install necessary system dependencies
-RUN apt update \
-    && apt install gcc musl-dev
+RUN apk update \
+    && apk add gcc musl-dev
 
 # Copy requirements.txt and install dependencies
 COPY ./app/requirements.txt .

@@ -38,3 +38,7 @@ jobs:
 
     - name: Push Docker image to Amazon ECR
       run: docker push ${{ steps.login-ecr.outputs.registry }}/$ECR_REPOSITORY/merumesh:latest
+
+    - name: Terraform Apply
+      working-directory: ./Terraform
+      run: terraform apply -auto-approve tfplan

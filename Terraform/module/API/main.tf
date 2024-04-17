@@ -30,13 +30,11 @@ resource "aws_api_gateway_deployment" "api_deployment" {
   rest_api_id     = aws_api_gateway_rest_api.api.id
   stage_name      = "prod"
 }
+resource "aws_lambda_permission" "allow_api" {
+  statement_id  = "AllowAPIgatewayInvokation"
+  action        = "lambda:InvokeFunction"
+  function_name = var.function_name
+  principal     = "apigateway.amazonaws.com"
 
-output "id" {
-  value = aws_api_gateway_rest_api.api.id
-}
-output "http_method" {
-  value = aws_api_gateway_method.api_method.http_method
-}
-output "path" {
-  value = aws_api_gateway_resource.api_resource.path
+  source_arn = "arn:aws:execute-api:${var.myregion}:${var.accountId}:${aws_api_gateway_rest_api.api.id}/*/${aws_api_gateway_method.api_method.http_method}${aws_api_gateway_resource.api_resource.path}"
 }

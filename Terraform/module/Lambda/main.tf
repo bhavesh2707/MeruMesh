@@ -11,17 +11,13 @@ resource "aws_lambda_function" "api_function" {
 
   role = var.iam_role
 }
-resource "aws_lambda_permission" "allow_api" {
-  statement_id  = "AllowAPIgatewayInvokation"
-  action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.api_function.function_name
-  principal     = "apigateway.amazonaws.com"
 
-  source_arn = var.source_arn
-}
 output "invoke_arn" {
   value = aws_lambda_function.api_function.invoke_arn
 }
 output "image_uri" {
   value = data.aws_ecr_image.service_image.image_uri
+}
+output "function_name" {
+  value = aws_lambda_function.api_function.function_name
 }

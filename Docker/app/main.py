@@ -1,10 +1,16 @@
-from mangum import Mangum
 from fastapi import FastAPI
+from mangum import Mangum
+
 
 app = FastAPI()
 
-@app.get("/")
-def read_root():
-    return {"Welcome": "Welcome to the FastAPI on Lambda"}
+
+@app.get("/test_run")
+async def healthcheck():
+    return {"success": "pong!"}
+
+@app.get("/api")
+async def healthcheck():
+    return {"success": "pong!"}
 
 handler = Mangum(app)

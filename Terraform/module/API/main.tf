@@ -12,7 +12,7 @@ resource "aws_api_gateway_resource" "api_resource" {
 resource "aws_api_gateway_method" "api_method" {
   rest_api_id   = aws_api_gateway_rest_api.api.id
   resource_id   = aws_api_gateway_resource.api_resource.id
-  http_method   = "POST"
+  http_method   = "GET"
   authorization = "NONE"
 }
 
@@ -21,7 +21,7 @@ resource "aws_api_gateway_integration" "api_integration" {
   resource_id             = aws_api_gateway_resource.api_resource.id
   http_method             = aws_api_gateway_method.api_method.http_method
   type                    = "AWS"
-  integration_http_method = "POST"
+  integration_http_method = "GET"
   uri                     = var.uri
 }
 
